@@ -1,6 +1,6 @@
 # Proyecto de regresión lineal y clasificación a partir de dataset de estudiantes
 
-##Objetivo
+## Objetivo
 El objetivo de este proyecto es analizar los datos de un grupo de estudiantes y, tras la limpieza y preprocesamiento de los datos, aplicar dos modelos:
 - Regresión lineal: predecir la nota final.
 - Clasificación: predecir si un estudiante aprueba o suspende.
