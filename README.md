@@ -5,10 +5,10 @@ El objetivo de este proyecto es analizar los datos de un grupo de estudiantes y,
 - Regresión lineal: predecir la nota final.
 - Clasificación: predecir si un estudiante aprueba o suspende.
 El trabajo se ha realizado en Python mediante un Jupyter Notebook. El código está organizado en cuatro bloques:
-1.- Análisis exploratorio del conjunto de datos
-2.- Preprocesamiento de los datos
-3.- Entrenamiento y validación del modelo de regresión
-4.- Entrenamiento y validación del modelo de clasificación
+- Análisis exploratorio del conjunto de datos
+- Preprocesamiento de los datos
+- Entrenamiento y validación del modelo de regresión
+- Entrenamiento y validación del modelo de clasificación
 
 ## Archivos necesarios
 - Proyecto_Regre_Clas_Alinares.ipynb: notebook con el código, las explicaciones y los resultados.
@@ -26,3 +26,41 @@ Nueve columnas se utilizan como datos de entrada: horas de estudio semanal, nota
 Las otras dos columnas son las variables objetivo:
 - nota_final: nota entre 0 y 100
 - aprobado: valor binario, 1 si la nota final es igual o superior a 60 y 0 si es inferior a este valor
+
+## Análisis exploratorio del conjunto de datos
+Se revisan el tamaño del dataset, los tipos de datos, los valores nulos, los duplicados y las estadísticas básicas. También se utilizan gráficos y comparaciones entre grupos para conocer las relaciones entre las variables.
+Los principales resultados son:
+- No se encuentran filas duplicadas.
+- Hay 150 valores nulos en horas de sueño, 100 en horario de estudio y 50 en estilo de aprendizaje.
+- La nota final media es de 71,44 puntos.
+- Hay 898 aprobados y 102 suspensos, por lo que ambos grupos tienen tamaños muy diferentes.
+- Las horas de estudio, la nota anterior y la asistencia presentan relaciones positivas con la nota final. Sus correlaciones de Pearson son aproximadamente 0,514, 0,470 y 0,317.
+- Los estudiantes con tutor tienen una nota media mayor. Las diferencias entre horarios y estilos de aprendizaje son pequeñas.
+- Los valores atípicos observados se mantienen porque son valores posibles.
+
+## Preprocesamiento de los datos
+Se reservan 800 estudiantes para entrenamiento y 200 para prueba, manteniendo aproximadamente la proporción de aprobados y suspensos. Se mantiene el orden original de los datos en la divisón.
+La preparación de los datos incluye:
+- Convertir la variable tiene tutor a valores 0 y 1.
+- Convertir los niveles de dificultad a valores 0, 1 y 2.
+- Sustituir los nulos de horas de sueño por la mediana de de los datos de entrenamiento (7.03 horas). Se utiliza este mismo valor para rellenar los valores nulos de los datos de prueba.
+- Completar en las variables horarios de estudio preferidos y estilos de aprendizaje, los campos sin información con la categoría "Desconocido".
+- Crear manualmente columnas de 0 y 1 para cada horario y estilo de aprendizaje.
+- Comprobar los tipos de datos, los valores nulos y los nombres de columnas duplicados.
+- Escalar las variables numéricas utilizando el mínimo y el máximo de entrenamiento, utilizando los límites de los datos de entrenamiento también para los de prueba.
+Finalmente, queda un dataframe con 16 columnas de entrada.
+
+## Entrenamiento y validación del modelo de regresión
+Se utiliza LinearRegression para predecir la nota final. Las predicciones se comparan con las notas reales de los 200 estudiantes de prueba.
+Las métricas utilizadas y sus resultados son las siguientes:
+- MAE (Mean Absolute Error): diferencia media en valor absoluto entre la nota real y la predicción. El resultado es de 6,12 puntos de diferencia.
+- R2: porcentaje de notas que es capaz de explicar el modelo. El resultado es de 0.3949, por lo que el modelo es capaz de explicar el 39,49% de las notas.
+- RMSE (Root Mean Squared Error): media de errores que comete el modelo comparado con el resultado real. El resultado de este error medio es de 7.45.
+Como conclusión, los resultados del modelo:
+- Tienen gran proximidad a los reales en los valores centrales.
+- En notas bajas, el modelo tiende a sobreestimar la nota prevista.
+- En notas altas, el modelo tiende a subestimar la nota prevista.
+
+## Entrenamiento y validación del modelo de clasificación
+
+## Conclusiones
