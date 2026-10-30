@@ -56,6 +56,7 @@ Las métricas utilizadas y sus resultados son las siguientes:
 - MAE (Mean Absolute Error): diferencia media en valor absoluto entre la nota real y la predicción. El resultado es de 6,12 puntos de diferencia.
 - R2: porcentaje de notas que es capaz de explicar el modelo. El resultado es de 0.3949, por lo que el modelo es capaz de explicar el 39,49% de las notas.
 - RMSE (Root Mean Squared Error): media de errores que comete el modelo comparado con el resultado real. El resultado de este error medio es de 7.45.
+
 Como conclusión, los resultados del modelo:
 - Tienen gran proximidad a los reales en los valores centrales.
 - En notas bajas, el modelo tiende a sobreestimar la nota prevista.
