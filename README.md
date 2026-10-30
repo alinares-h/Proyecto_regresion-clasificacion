@@ -19,6 +19,7 @@ El trabajo se ha realizado en Python mediante un Jupyter Notebook. El código es
 - Python
 - Jupyter Notebook
 - Librerías: pandas, matplotlib, scikit-learn
+- Los ficheros "Proyecto_Regre_Clas_Alinares.ipynb" y "dataset_estudiantes.csv" deben estar en la misma carpeta antes de la ejecución del código.
 
 ## Descripción de los datos
 El dataset contiene registros correspondientes a 1.000 estudiantes y tiene 11 columnas.
@@ -39,7 +40,7 @@ Los principales resultados son:
 - Los valores atípicos observados se mantienen porque son valores posibles.
 
 ## Preprocesamiento de los datos
-Se reservan 800 estudiantes para entrenamiento y 200 para prueba, manteniendo aproximadamente la proporción de aprobados y suspensos. Se mantiene el orden original de los datos en la divisón.
+Se reservan 800 estudiantes para entrenamiento y 200 para prueba, manteniendo aproximadamente la proporción de aprobados y suspensos. Se utiliza la parametrización radom_state = 42 para obtener la misma división cada vez que se ejecuta el código.
 La preparación de los datos incluye:
 - Convertir la variable tiene tutor a valores 0 y 1.
 - Convertir los niveles de dificultad a valores 0, 1 y 2.
@@ -54,11 +55,11 @@ Finalmente, queda un dataframe con 16 columnas de entrada.
 Se utiliza LinearRegression para predecir la nota final. Las predicciones se comparan con las notas reales de los 200 estudiantes de prueba.
 Las métricas utilizadas y sus resultados son las siguientes:
 - MAE (Mean Absolute Error): diferencia media en valor absoluto entre la nota real y la predicción. El resultado es de 6,12 puntos de diferencia.
-- R2: porcentaje de notas que es capaz de explicar el modelo. El resultado es de 0.3949, por lo que el modelo es capaz de explicar el 39,49% de las notas.
-- RMSE (Root Mean Squared Error): media de errores que comete el modelo comparado con el resultado real. El resultado de este error medio es de 7.45.
+- R2: indica qué proporción de la variación de notas explica el modelo. El resultado es de 0.3949, el 39,49% de las notas.
+- RMSE (Root Mean Squared Error): raíz del error cuadrático medio, que pondera más altos los errores más grandes. El resultado de este error medio es de 7.45.
 
 Como conclusión, los resultados del modelo:
-- Tienen gran proximidad a los reales en los valores centrales.
+- Tienen mayor proximidad a los reales en los valores centrales.
 - En notas bajas, el modelo tiende a sobreestimar la nota prevista.
 - En notas altas, el modelo tiende a subestimar la nota prevista.
 
@@ -67,15 +68,16 @@ Se utiliza un modelo de regresión logística (LogisticRegression) para predecir
 Comparando en los datos de prueba el resultado del modelo y el valor real se obtiene la siguiente conclusión (matriz de confusión):
 - Suspensos reales: 20 -> suspensos modelo: 2
 - Aprobados reales: 180 -> aprobados modelo: 179
+- El modelo tiene un porcentaje de acierto global del 90,50%
 Ante la desviación detectada sobre los suspensos, se utilizan dos métricas para analizar los registros correspondientes a alumnos suspensos:
-- Precision_score: porcentaje de suspensos identificados por el modelo sobre los suspensos reales. El resultado es del 66,67%.
+- Precision_score: de los estudiantes que el modelo predice como suspensos, índica el porcentaje de cuáles los son realmente. El resultado es del 66,67%.
 - Recall_score: porcentaje de suspensos reales que el modelo ha sido capaz de detectar. El resultado es del 10%.
 
 El modelo predice tres suspensos y acierta en dos de ellos. Sin embargo, solo detecta 2 de los 20 suspensos reales y deja 18 sin detectar. Aunque el porcentaje de aciertos es elevado (90%), el modelo tiene muchas dificultades para detectar los alumnos que suspenden siendo una deficiencia importante.
 
 ## Conclusiones
-Se han completado los cuatro bloques del proyecto utilizando modelos básicos y una preparación de datos explicada paso a paso.
-La regresión permite aproximar las notas finales, aunque mantiene un error considerable y no reproduce toda su variación. La clasificación consigue un porcentaje alto de aciertos, pero detecta pocos suspensos. Esto muestra por qué es necesario revisar varias métricas y no quedarse solo con el porcentaje de aciertos.
-Los resultados corresponden a una única división de entrenamiento y prueba. No se ha realizado validación cruzada ni comparación de distintas configuraciones de los modelos. Además, solo hay 20 suspensos en prueba: detectar uno más o uno menos cambia el recall en cinco puntos porcentuales.
-Al conservar todas las columnas de horario y estilo, existe información redundante. No se han interpretado los coeficientes de la regresión lineal como efectos individuales de cada categoría.
-Como posible mejora futura, se podría estudiar cómo detectar más suspensos teniendo en cuenta el desequilibrio entre los dos grupos, utilizando los datos de entrenamiento para elegir los cambios y reservando los de prueba para la evaluación final.
+Tras completar los cuatro bloques básicos solicitados en el enunciado del proyecto (EDA, preprocesamiento, modelo de regresión, modelo de clasificación), las principales conclusiones del trabajo son las siguientes:
+- Las horas de estudio, la nota anterior y la asistencia son las variables numéricas que muestran mayor relación con la nota final.
+- El tratamiento de los nulos y la conversión de las categorías a valores numéricos han permitido preparar los datos para ambos modelos.
+- La regresión lineal permite aproximar las notas finales, aunque mantiene diferencias respecto a las notas reales.
+- La clasificación acierta con el resultado del examen (aprobado o suspenso) en la mayoría de los estudiantes (90,50%), pero tiene mucha dificultad para detectar los suspensos.
