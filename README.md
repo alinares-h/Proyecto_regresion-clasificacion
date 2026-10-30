@@ -63,5 +63,19 @@ Como conclusión, los resultados del modelo:
 - En notas altas, el modelo tiende a subestimar la nota prevista.
 
 ## Entrenamiento y validación del modelo de clasificación
+Se utiliza un modelo de regresión logística (LogisticRegression) para predecir aprobado (1) o suspenso (0).
+Comparando en los datos de prueba el resultado del modelo y el valor real se obtiene la siguiente conclusión (matriz de confusión):
+- Suspensos reales: 20 -> suspensos modelo: 2
+- Aprobados reales: 180 -> aprobados modelo: 179
+Ante la desviación detectada sobre los suspensos, se utilizan dos métricas para analizar los registros correspondientes a alumnos suspensos:
+- Precision_score: porcentaje de suspensos identificados por el modelo sobre los suspensos reales. El resultado es del 66,67%.
+- Recall_score: porcentaje de suspensos reales que el modelo ha sido capaz de detectar. El resultado es del 10%.
+
+El modelo predice tres suspensos y acierta en dos de ellos. Sin embargo, solo detecta 2 de los 20 suspensos reales y deja 18 sin detectar. Aunque el porcentaje de aciertos es elevado (90%), el modelo tiene muchas dificultades para detectar los alumnos que suspenden siendo una deficiencia importante.
 
 ## Conclusiones
+Se han completado los cuatro bloques del proyecto utilizando modelos básicos y una preparación de datos explicada paso a paso.
+La regresión permite aproximar las notas finales, aunque mantiene un error considerable y no reproduce toda su variación. La clasificación consigue un porcentaje alto de aciertos, pero detecta pocos suspensos. Esto muestra por qué es necesario revisar varias métricas y no quedarse solo con el porcentaje de aciertos.
+Los resultados corresponden a una única división de entrenamiento y prueba. No se ha realizado validación cruzada ni comparación de distintas configuraciones de los modelos. Además, solo hay 20 suspensos en prueba: detectar uno más o uno menos cambia el recall en cinco puntos porcentuales.
+Al conservar todas las columnas de horario y estilo, existe información redundante. No se han interpretado los coeficientes de la regresión lineal como efectos individuales de cada categoría.
+Como posible mejora futura, se podría estudiar cómo detectar más suspensos teniendo en cuenta el desequilibrio entre los dos grupos, utilizando los datos de entrenamiento para elegir los cambios y reservando los de prueba para la evaluación final.
